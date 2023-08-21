@@ -3,9 +3,8 @@
 # this library imports number pi to calculate the circle
 import math
 
+
 # yes / no function for instructions for a calculator
-
-
 def yes_no(question):
 
     while True:
@@ -35,39 +34,41 @@ def int_check(question, low, high):
             print(error)
 
 
-# this function calculates the area of a square
+# this variable calculates the area of a square
 def square(x):
     return x ** 2
 
 
-# This function calculates the area of a rectangle
+# This variable calculates the area of a rectangle
 def rectangle(x, y):
     return x * y
 
 
-# This function calculates the area of a triangle
+# This variable calculates the area of a triangle
 def triangle(x, y):
     return 1/2 * x * y
 
 
-# This function calculates the area of a circle
+# This variable calculates the area of a circle
 def circle(x):
     return math.pi * x ** 2
 
 
-# this function calculates the area of a parallelogram
+# this variable calculates the area of a parallelogram
 def parallelogram(x, y):
     return x * y
 
 
-max_calculations = 10
+# variables to ensure that the user has a limited number of calculations.
+# Starts out with 6 because you need at least 1 calculation to quit
+# the user would probably not want to waste their 1 calculation on something irrelevant, that's why its 6
+max_calculations = 6
 start_calculations = 0
+
+
 # main routine starts here
-
 # asks if the user wants instructions
-
-
-want_instructions = yes_no("do you want to hear the instructions? ")
+want_instructions = yes_no("> Do you want to hear the instructions? ")
 
 if want_instructions == "yes":
     print()
@@ -92,7 +93,7 @@ print("3. Area of a triangle:")
 print("4.Area of a circle:")
 print("5.Area of a parallelogram:")
 
-# variable that allows the loop to run
+# variable that allows the loop to run if the max amount of calculations hadn't been reached
 next_calculation = ""
 
 # a loop which will keep on going and calculating until the user presses enter
@@ -100,9 +101,7 @@ while next_calculation == "" and start_calculations < max_calculations:
     # take input from the user
     choice = int_check(">Enter the number of the shape you want to calculate: ", 1, 5)
 
-    # check if choice is one of the five options
-    # if choice in ('1', '2', '3', '4', '5'):
-
+    # check if choice is one of the five options and does calculations according to the choice
     if choice == 1:
         side = int_check("> Enter the side (1=min, 100=max): ", 1, 100)
         start_calculations += 1
@@ -132,14 +131,17 @@ while next_calculation == "" and start_calculations < max_calculations:
         print(side, "*", length, "=", parallelogram(side, length))
 
     # check if user wants another calculation
-    # break the while loop if answer is anything other than ENTER
+    # break the while loop if answer is anything other than ENTER (so a letter, a number, or anything in between.)
+
+    # this is to check how many calculations have been done overall, and keeps things in check.
+    # breaks the loop if max amount had been reached, and keeps going if it hadn't
     if start_calculations == max_calculations:
-        print("you have done all calculations available.")
+        print("> You have done all calculations available.")
         break
     else:
-        print("you have done {} calculations. there is"
+        print("> You have done {} calculations. there is"
               " {} calculations available".format(start_calculations, max_calculations - start_calculations))
 
-    next_calculation = input("Press ENTER to continue or type a letter to quit: ")
+    next_calculation = input("> Press ENTER to continue or type a letter to quit: ")
 
 print("The program has ended")
